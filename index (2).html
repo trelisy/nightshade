@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Barlow:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0c0a;
+    color: #c8d4c0;
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+
+  .scanlines {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 40px 64px;
+  }
+
+  .header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #2a3a28;
+    padding-bottom: 16px;
+    margin-bottom: 40px;
+  }
+
+  .classification-banner {
+    background: #8b0000;
+    color: #ffcccc;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-align: center;
+    padding: 7px 20px;
+    border: 1px solid #cc0000;
+  }
+
+  .corner-mark {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: #2a3a28;
+    letter-spacing: 1px;
+  }
+
+  .agency-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .emblem {
+    width: 64px; height: 64px;
+    border: 2px solid #3a5030;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto 20px;
+    background: #0d110d;
+  }
+
+  .emblem::before {
+    content: '';
+    position: absolute;
+    width: 52px; height: 52px;
+    border: 1px solid #2a3a28;
+    border-radius: 50%;
+  }
+
+  .emblem svg { width: 32px; height: 32px; }
+
+  .agency-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 12px;
+    letter-spacing: 8px;
+    color: #4a6040;
+    margin-bottom: 10px;
+  }
+
+  .doc-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 46px;
+    letter-spacing: 3px;
+    color: #8ab878;
+    line-height: 1;
+    margin-bottom: 6px;
+    animation: glitch 8s infinite;
+  }
+
+  @keyframes glitch {
+    0%, 95%, 100% { text-shadow: none; }
+    96% { text-shadow: 2px 0 #ff0000, -2px 0 #00ff00; }
+    97% { text-shadow: -1px 0 #ff0000, 1px 0 #00ff00; }
+    98% { text-shadow: none; }
+    99% { text-shadow: 1px 0 #0000ff; }
+  }
+
+  .doc-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #4a6040;
+    letter-spacing: 3px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: #2a3a28; }
+  .divider-diamond { width: 6px; height: 6px; background: #4a6040; transform: rotate(45deg); }
+
+  .body-text {
+    font-size: 14px;
+    line-height: 2;
+    color: #9aaa90;
+    font-weight: 300;
+    margin-bottom: 22px;
+  }
+
+  .body-text strong { color: #c8d4c0; font-weight: 600; }
+
+  .signature-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #2a3a28;
+    position: relative;
+  }
+
+  .sig-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: #4a6040;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+  }
+
+  .sig-line {
+    border-bottom: 1px solid #3a5030;
+    margin-bottom: 6px;
+    height: 28px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4px;
+  }
+
+  .sig-cursive {
+    font-family: 'Barlow', sans-serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #7aaa60;
+    opacity: 0.8;
+  }
+
+  .sig-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #4a6040;
+    letter-spacing: 1px;
+    line-height: 1.6;
+  }
+
+  .stamp {
+    position: absolute;
+    right: 20px;
+    top: 40%;
+    transform: translateY(-50%) rotate(-18deg);
+    border: 3px solid rgba(80,160,60,0.4);
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: rgba(80,160,60,0.35);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .footer-classification {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #1a2418;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: #2a3a28;
+    letter-spacing: 2px;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="page">
+
+  <div class="header-bar">
+    <div class="corner-mark">DOC-7734-ALPHA</div>
+    <div class="classification-banner">⬛ TOP SECRET // NOFORN ⬛</div>
+    <div class="corner-mark">PAGE 1 OF 1</div>
+  </div>
+
+  <div class="agency-header">
+    <div class="emblem">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,3 21,13 31,13 23,19 26,29 18,23 10,29 13,19 5,13 15,13" fill="none" stroke="#4a8040" stroke-width="1.2"/>
+        <circle cx="18" cy="18" r="4" fill="none" stroke="#4a8040" stroke-width="1"/>
+        <circle cx="18" cy="18" r="1.5" fill="#4a8040"/>
+      </svg>
+    </div>
+    <div class="agency-name">Defense Intelligence Directorate — Special Activities Division</div>
+    <div class="doc-title">TRANSMISSION ACKNOWLEDGED</div>
+    <div class="doc-subtitle">// OFFICIAL RECOGNITION OF SUCCESSFUL HANDOFF //</div>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="body-text">
+    To: <strong>PHANTOM-9</strong><br>
+    From: <strong>Director of Special Operations, SAD/SOG</strong><br>
+    Date: <strong>2026-04-24 // 03:17 ZULU</strong>
+  </p>
+
+  <p class="body-text">
+    On behalf of the Directorate and the full chain of command, this transmission serves as formal acknowledgment and sincere gratitude for your conduct during the handoff operation executed on the night in question.
+  </p>
+
+  <p class="body-text">
+    The secret cargo was delivered intact, on schedule, and without compromise. The receiving team confirmed full integrity of the package upon inspection. This outcome is a direct result of your preparation, discipline, and exceptional tradecraft in the field.
+  </p>
+
+  <p class="body-text">
+    Your service to this mission and to this Directorate does not go unrecognized. You have the gratitude of those who operate in the light — and those who do not.
+  </p>
+
+  <p class="body-text">
+    Well done, operative. Stand by for further tasking.
+  </p>
+
+  <div class="signature-block">
+    <div>
+      <div class="sig-label">// AUTHORIZED BY //</div>
+      <div class="sig-line"><div class="sig-cursive">N. Roeder</div></div>
+      <div class="sig-name">DIR. N. ROEDER<br>SPECIAL ACTIVITIES DIVISION</div>
+    </div>
+    <div>
+      <div class="sig-label">// COUNTERSIGNED //</div>
+      <div class="sig-line"><div class="sig-cursive">A. Chikvaidze</div></div>
+      <div class="sig-name">DEP. DIR. A. CHIKVAIDZE<br>OPERATIONS SECURITY REVIEW</div>
+    </div>
+    <div class="stamp">CONFIRMED</div>
+  </div>
+
+  <div class="footer-classification">
+    TOP SECRET // NOFORN — DESTROY AFTER READING<br>
+    DID-SAD-7734-ALPHA // BURN AFTER CONFIRMATION
+  </div>
+
+</div>
+</body>
+</html>
